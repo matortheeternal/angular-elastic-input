@@ -51,13 +51,15 @@ angular.module('puElasticInput', []).directive('puElasticInput', ['$document', '
             wrapper.append(mirror);
 
             function update() {
+                var defaultDelta = 1;
                 if (element[0].tagName === "SELECT") {
                     var index = element[0].selectedIndex;
+                    defaultDelta = 8;
                     mirror.text((index > -1 && element[0].options[index].text) || attrs.placeholder || '');
                 } else if (element[0].tagName === "INPUT") {
                     mirror.text(element.val() || attrs.placeholder || '');
                 }
-                var delta = parseInt(attrs.puElasticInputWidthDelta) || 1;
+                var delta = parseInt(attrs.puElasticInputWidthDelta) || defaultDelta;
                 element.css('width', mirror.prop('offsetWidth') + delta + 'px');
             }
 
